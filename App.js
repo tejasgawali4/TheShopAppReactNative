@@ -5,12 +5,17 @@ import productsReducer from './store/reducers/products';
 import ShopNavigator from './navigation/ShopNavigator';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import cartReducer from './store/reducers/cart';
+
+//Remove while production Build
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
-  product : productsReducer
+  product : productsReducer,
+  cart : cartReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 const fetchFonts = () => {
   return Font.loadAsync({
