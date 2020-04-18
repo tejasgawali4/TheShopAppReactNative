@@ -1,8 +1,9 @@
 import React from 'react';
-import { FlatList , StyleSheet } from 'react-native';
+import { FlatList , StyleSheet , Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import HeaderButton from '../../components/UI/HeaderButton';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import OrderItem from '../../components/shop/OrderItem';
 
 const OrderScreen = props => {
 
@@ -12,7 +13,11 @@ const OrderScreen = props => {
         <FlatList
             data={orders}
             keyExtractor={item => item.id}
-            renderItem={itemDate => <Text>{itemDate.item.totalAmount}</Text>}        
+            renderItem={itemData => <OrderItem
+                amt={itemData.item.totalAmount}
+                date={itemData.item.date}
+                items={itemData.item.items}
+            />}        
         />
     );
 };
