@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import productsReducer from './store/reducers/products';
 import ShopNavigator from './navigation/ShopNavigator';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
-import cartReducer from './store/reducers/cart';
 
-//Remove while production Build
+import productsReducer from './store/reducers/products';
+import cartReducer from './store/reducers/cart';
+import odersReducer from './store/reducers/oders';
+
+
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
   product : productsReducer,
-  cart : cartReducer
+  cart : cartReducer,
+  order : odersReducer
 });
 
 const store = createStore(rootReducer, composeWithDevTools());
