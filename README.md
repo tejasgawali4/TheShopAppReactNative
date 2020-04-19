@@ -8,7 +8,8 @@ Shopping app using react native
 <img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/4.png" width="200"/>   
 <img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/5.png" width="200"/>   
 <img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/6.png" width="200"/>   
-<img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/9.png" width="200"/>   
+<img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/7.png" width="200"/> 
+<img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/8.png" width="200"/>   
 </div>
 
 <h2>Debugging With React Native</h2>
