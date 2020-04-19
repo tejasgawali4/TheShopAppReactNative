@@ -46,7 +46,8 @@ defaultNavigationOptions : defaultNavOptions
 });
 
 const AdminNavigator = createStackNavigator({
-  Admin : UserProductScreen ,
+  UserProduct : UserProductScreen ,
+  EditProduct : EditProductScreen
 },{
 defaultNavigationOptions : defaultNavOptions
 });
