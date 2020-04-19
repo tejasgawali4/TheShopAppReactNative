@@ -12,8 +12,11 @@ Shopping app using react native
 <img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/6.png" width="200"/>   
 <img align="left" src="https://github.com/tejasgawali4/TheShopAppReactNative/blob/master/ss/7.png" width="200"/>   
 
+</br><br>
 
 <h2>Debugging With React Native</h2>
+
+</br><br>
 
 You can debug Redux in React Native apps with help of the React Native Debugger tool: https://github.com/jhen0409/react-native-debugger/blob/master/docs/redux-devtools-integration.md
 
