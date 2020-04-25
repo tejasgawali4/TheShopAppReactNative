@@ -18,19 +18,20 @@ import Colors from '../../constants/Colors';
 
 const ProductOverviewScreen = props => {
     const [error,setError] = useState('');
+    const [IsRefreshing,setIsRefreshing] = useState(false);
     const [isLoading,setIsLoading] = useState(false);
     const products = useSelector(state => state.product.availableProducts);
     const dispatch = useDispatch();
 
     const loadProducts = useCallback(async () => {
+        setIsRefreshing(true);
         setError(null);
-        setIsLoading(true);
         try{
             await dispatch(productActions.fetchProducts());
         }catch(err){
             setError(err.message);
         }
-        setIsLoading(false);
+        setIsRefreshing(false);
     },[dispatch,setIsLoading,setError]);
 
 
@@ -39,7 +40,10 @@ const ProductOverviewScreen = props => {
     },[loadProducts]);
 
     useEffect(()=>{
-        loadProducts();
+        setIsLoading(true);
+        loadProducts().then(()=>{
+            setIsLoading(false);
+        });
     },[dispatch,loadProducts]);
 
     if(error){
@@ -69,6 +73,8 @@ const ProductOverviewScreen = props => {
     };
 
     return (<FlatList
+        onRefresh={loadProducts}
+        refreshing={IsRefreshing}
         data={products}
         renderItem={itemData => 
             <ProductItem 

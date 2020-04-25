@@ -6,7 +6,6 @@ export const SET_PRODUCT = 'SET_PRODUCT';
 
 export const fetchProducts = () => {
     return async dispatch => {
-
         try {
             const response = await fetch('https://reactnativedemos-de869.firebaseio.com/products.json');
 
@@ -33,24 +32,43 @@ export const fetchProducts = () => {
 };
 
 export const deleteProduct = ( productId ) => {
-    return { 
-        type : DELETE_PRODUCT , 
-        pid : productId
-    }
+    return async dispatch => {
+        
+        const response = await fetch(`https://reactnativedemos-de869.firebaseio.com/products/${productId}.json`,{
+            method : 'DELETE'
+        });
+
+        if(!response.ok){
+            throw new Error('Something went wrong..');
+        }
+
+        dispatch({ 
+            type : DELETE_PRODUCT , 
+            pid : productId
+        });
+    };
 };
 
 export const createProduct = (title, description , imageUrl , price ) => {
     return async dispatch => {
 
-        const response = fetch('https://reactnativedemos-de869.firebaseio.com/products.json',{
+        const response = await fetch('https://reactnativedemos-de869.firebaseio.com/products.json',{
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
             },
-            body : JSON.stringify({title,imageUrl,description,price})
+            body : JSON.stringify({
+                title,
+                imageUrl,
+                description,
+                price})
         });
-
+        
         const resData = await response.json();
+
+        if(!response.ok){
+            throw new Error('Something went wrong..');
+        }
 
         dispatch ({
             type : CREATE_PRODUCT,
@@ -66,13 +84,32 @@ export const createProduct = (title, description , imageUrl , price ) => {
 };
 
 export const updateProduct = (id , title, description , imageUrl ) => {
-    return {
-        type : UPDATE_PRODUCT,
-        pid : id,
-        productData : {
-            title,
-            description,
-            imageUrl        
+
+    return async dispatch => {
+
+        const response = await fetch(`https://reactnativedemos-de869.firebaseio.com/products/${id}.json`,{
+            method : 'PATCH',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                title,
+                imageUrl,
+                description})
+        });
+
+        if(!response.ok){
+            throw new Error('Something went wrong..');
         }
-    }
+
+        dispatch({
+            type : UPDATE_PRODUCT,
+            pid : id,
+            productData : {
+                title,
+                description,
+                imageUrl        
+            }
+        });
+    };
 };
