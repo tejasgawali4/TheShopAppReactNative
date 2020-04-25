@@ -27,7 +27,7 @@ const ProductItem = props => {
                     <View style={styles.image}>
                         <Image
                             style={styles.imageContainer} 
-                            source={{ uri: props.imageUrl}}/>
+                            source={{ uri: props.imageUrl.toString()}}/>
                     </View>
                     <View style={styles.details}>
                         <Text style={styles.title}>{props.title}</Text>
