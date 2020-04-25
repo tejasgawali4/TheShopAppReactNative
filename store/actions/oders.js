@@ -1,12 +1,15 @@
 import Order from "../../models/order";
 export const ADD_ORDER = 'ADD_ORDER';
 export const SET_ORDERS = 'SET_ORDERS';
+import Config from '../../constants/Config';
 
 export const fetchOrders = () => {
-    return async dispatch => {
+    return async (dispatch,getState) => {
+        const token = getState().auth.token;
+        const userId = getState().auth.userId;
         try {
             const response = await fetch(
-            'https://reactnativedemos-de869.firebaseio.com/orders/u1.json'
+            `${Config.API_BASE_URL}/orders/${userId}.json?auth=${token}`
             );
     
             if (!response.ok) {
@@ -35,9 +38,11 @@ export const fetchOrders = () => {
 
 export const addOrder = ( cartItem , totalAmount ) => {
 
-    return async dispatch => {
+    return async (dispatch,getState) => {
+        const token = getState().auth.token;
+        const userId = getState().auth.userId;
         const date = new Date();
-        const response = await fetch('https://reactnativedemos-de869.firebaseio.com/orders/u1.json',{
+        const response = await fetch(`${Config.API_BASE_URL}/orders/${userId}.json?auth=${token}`,{
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'

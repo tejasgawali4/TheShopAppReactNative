@@ -3,11 +3,14 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const SET_PRODUCT = 'SET_PRODUCT';
+import Config from '../../constants/Config';
 
 export const fetchProducts = () => {
-    return async dispatch => {
+    return async (dispatch,getState) => {
+        const userId = getState().auth.userId;
+        const token = getState().auth.token;
         try {
-            const response = await fetch('https://reactnativedemos-de869.firebaseio.com/products.json');
+            const response = await fetch(`${Config.API_BASE_URL}/products.json?auth=${token}`);
 
             if(!response.ok){
                 throw new Error('Something went wrong..');
@@ -18,11 +21,20 @@ export const fetchProducts = () => {
             const loadedProducts = [];
     
             for(const key in resData){
-                loadedProducts.push(new Product(key, 'u1' , resData[key].title,resData[key].imageUrl,
-                resData[key].description,resData[key].price));
+                loadedProducts.push(new Product(
+                    key, 
+                    resData[key].ownerId,
+                    resData[key].title,
+                    resData[key].imageUrl,
+                    resData[key].description,
+                    resData[key].price));
             }
     
-            dispatch({type : SET_PRODUCT , products : loadedProducts });
+            dispatch({
+                type : SET_PRODUCT , 
+                products : loadedProducts,
+                userProducts : loadedProducts.filter(product => product.ownerId === userId) 
+            });
         }catch(err){
             console.log(err);
             throw err;
@@ -32,9 +44,9 @@ export const fetchProducts = () => {
 };
 
 export const deleteProduct = ( productId ) => {
-    return async dispatch => {
-        
-        const response = await fetch(`https://reactnativedemos-de869.firebaseio.com/products/${productId}.json`,{
+    return async (dispatch,getState) => {
+        const token = getState().auth.token;
+        const response = await fetch(`${Config.API_BASE_URL}/products/${productId}.json?auth=${token}`,{
             method : 'DELETE'
         });
 
@@ -50,9 +62,10 @@ export const deleteProduct = ( productId ) => {
 };
 
 export const createProduct = (title, description , imageUrl , price ) => {
-    return async dispatch => {
-
-        const response = await fetch('https://reactnativedemos-de869.firebaseio.com/products.json',{
+    return async (dispatch,getState) => {
+        const token = getState().auth.token;
+        const userId = getState().auth.userId;
+        const response = await fetch(`${Config.API_BASE_URL}/products.json?auth=${token}`,{
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
@@ -61,7 +74,8 @@ export const createProduct = (title, description , imageUrl , price ) => {
                 title,
                 imageUrl,
                 description,
-                price})
+                price,
+                ownerId : userId})
         });
         
         const resData = await response.json();
@@ -77,7 +91,8 @@ export const createProduct = (title, description , imageUrl , price ) => {
                 title,
                 description,
                 imageUrl,
-                price
+                price,
+                ownerId : userId
             }
         });
     };
@@ -85,9 +100,9 @@ export const createProduct = (title, description , imageUrl , price ) => {
 
 export const updateProduct = (id , title, description , imageUrl ) => {
 
-    return async dispatch => {
-
-        const response = await fetch(`https://reactnativedemos-de869.firebaseio.com/products/${id}.json`,{
+    return async (dispatch,getState) => {
+        const token = getState().auth.token;
+        const response = await fetch(`${Config.API_BASE_URL}/products/${id}.json?auth=${token}`,{
             method : 'PATCH',
             headers : {
                 'Content-Type' : 'application/json'

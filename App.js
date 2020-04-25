@@ -8,6 +8,7 @@ import * as Font from 'expo-font';
 import productsReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
 import odersReducer from './store/reducers/oders';
+import authReducer from './store/reducers/auth';
 import ReduxThunk from 'redux-thunk';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -15,7 +16,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const rootReducer = combineReducers({
   product : productsReducer,
   cart : cartReducer,
-  order : odersReducer
+  order : odersReducer,
+  auth : authReducer
 });
 
 const store = createStore(rootReducer,applyMiddleware(ReduxThunk), composeWithDevTools());

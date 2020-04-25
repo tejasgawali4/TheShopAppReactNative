@@ -72,6 +72,15 @@ const ProductOverviewScreen = props => {
         });
     };
 
+    
+    if (!isLoading && products.length === 0) {
+        return (
+        <View style={styles.centered}>
+            <Text>No products found. Maybe start adding some!</Text>
+        </View>
+        );
+    }
+
     return (<FlatList
         onRefresh={loadProducts}
         refreshing={IsRefreshing}
