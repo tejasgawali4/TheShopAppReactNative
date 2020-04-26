@@ -49,7 +49,6 @@ xcuserdata
 .history/
 
 # Android
-*.apk
 *.hprof
 /android/**/build
 /android/**/local.properties
