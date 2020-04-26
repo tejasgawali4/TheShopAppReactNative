@@ -11,8 +11,9 @@ export const authenticate = (userId, token, expiryTime) => {
     };
 };
   
-export const singup = (email,password) => {
+export const signup = (email,password) => {
     return async dispatch => {
+        console.log(`${Config.AUTH}:signUp?key=${Config.KEY}`);
         const response = await fetch(
         `${Config.AUTH}:signUp?key=${Config.KEY}`,
         {

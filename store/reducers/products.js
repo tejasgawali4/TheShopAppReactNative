@@ -1,5 +1,9 @@
-import PRODUCTS from '../../data/dummy-data';
-import {DELETE_PRODUCT , UPDATE_PRODUCT , CREATE_PRODUCT, SET_PRODUCT } from '../actions/products';
+import {
+    DELETE_PRODUCT,
+    CREATE_PRODUCT,
+    UPDATE_PRODUCT,
+    SET_PRODUCT
+  } from '../actions/products';
 import Product from '../../models/product';
 
 const initialState = {

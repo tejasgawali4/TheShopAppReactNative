@@ -9,6 +9,7 @@ export const fetchProducts = () => {
     return async (dispatch,getState) => {
         const userId = getState().auth.userId;
         const token = getState().auth.token;
+        console.log(userId);
         try {
             const response = await fetch(`${Config.API_BASE_URL}/products.json?auth=${token}`);
 

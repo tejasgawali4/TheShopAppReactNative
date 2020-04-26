@@ -49,7 +49,7 @@ const ProductOverviewScreen = props => {
     if(error){
         return <View style={styles.loading}>
              <Text>{error}</Text>
-             <Button color={Colors.primary} text={'try agin'} onPress={loadProducts}/>
+             <Button color={Colors.primary} text='try agin' onPress={loadProducts}/>
         </View>;
     }
 
