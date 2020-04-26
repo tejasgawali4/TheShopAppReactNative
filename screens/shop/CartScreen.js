@@ -10,6 +10,7 @@ import {
 import { useSelector , useDispatch } from 'react-redux';
 import CartItem from '../../components/shop/CartItem';
 import * as cartActions from '../../store/actions/cart';
+import * as orderActions from '../../store/actions/oders';
 import Card from '../../components/UI/Card';
 import Colors from '../../constants/Colors';
 
@@ -38,7 +39,7 @@ const CartScreen = () => {
 
     const sendOrderHandler = async () => {
       setIsLoading(true);
-      await dispatch(cartActions.addOrder(cartItems,cartTotalAmount));    
+      await dispatch(orderActions.addOrder(cartItems,cartTotalAmount));    
       setIsLoading(false);      
     }
 
